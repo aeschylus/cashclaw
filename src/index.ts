@@ -5,15 +5,17 @@ async function main() {
 
   const server = await startAgent();
 
-  // Open browser
-  const url = "http://localhost:3777";
-  const { execFile: execFileCb } = await import("node:child_process");
-  const opener = process.platform === "darwin"
-    ? "open"
-    : process.platform === "win32"
-      ? "start"
-      : "xdg-open";
-  execFileCb(opener, [url], () => {});
+  // Open browser (local dev only)
+  if (!process.env.PORT) {
+    const url = "http://localhost:3777";
+    const { execFile: execFileCb } = await import("node:child_process");
+    const opener = process.platform === "darwin"
+      ? "open"
+      : process.platform === "win32"
+        ? "start"
+        : "xdg-open";
+    execFileCb(opener, [url], () => {});
+  }
 
   // Graceful shutdown
   const shutdown = () => {

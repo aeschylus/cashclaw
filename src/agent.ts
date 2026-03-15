@@ -19,7 +19,7 @@ import { loadChat, appendChat, clearChat } from "./memory/chat.js";
 import { agentcashBalance } from "./tools/agentcash.js";
 import * as cli from "./moltlaunch/cli.js";
 
-const PORT = 3777;
+const PORT = Number(process.env.PORT) || 3777;
 const MAX_BODY_BYTES = 1_048_576; // 1 MB
 
 type ServerMode = "setup" | "running";
